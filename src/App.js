@@ -7,15 +7,19 @@ import {
   Card, 
   CardContent
 } from '@material-ui/core'
-
+import Table from './components/Table';
 import InfoBox from './components/InfoBox';
 import Map from './components/Map';
+import { sortData } from './util.js';
+import { Line } from 'react-chartjs-2';
+import LineGraph from './components/LineGraph';
 
 function App() {
 
   const [ countries, setCountries ] = useState([]);
   const [ country, setCountry ] = useState("worldwide");
   const [ countryInfo, setCountryInfo ] = useState([]);
+  const [ tableData, setTableData ] = useState([]);
 
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
@@ -35,6 +39,9 @@ function App() {
             value: country.countryInfo.iso2
           }));
 
+          const sortedData = sortData(data);
+
+          setTableData(sortedData)
           setCountries(countries);
         });
     };
@@ -89,9 +96,10 @@ function App() {
         <CardContent>
           {/* Table */}
           <h3>Live Cases by Country</h3>
-
+          <Table countries={tableData}/>
           {/* Graph */}
           <h3>Worldwide Cases</h3>
+          <LineGraph />
         </CardContent>
       </Card>
     </div>
