@@ -22,26 +22,6 @@ const options = {
             }
         }
     }, 
-    scales:{
-        xAxes:[{
-            type: "time", 
-            time: {
-                format: "MM/DD/YY",
-                tooltipFormat: "ll",
-            },
-        }],
-        yAxes: [{
-            gridLines: {
-                display: false,
-            }, 
-            ticks: {
-                callback: function (value, index, values){
-                    return numeral(value).format("0a");
-                },
-            },
-        }],
-
-    }
 }
 
 function LineGraph({ casesType = 'cases'}) {
