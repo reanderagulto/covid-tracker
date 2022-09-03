@@ -23,7 +23,12 @@ body{
 }
 
 .app__left{
-  flex: 0.9;
+  width: 60%;
+  flex: 0.9 1;
+}
+
+.app__right{
+  width: 40%;
 }
 
 .app__stats{
@@ -31,11 +36,10 @@ body{
   justify-content: space-between;
 }
 
-@media (max-width: 990px) {
+@media (max-width: 1024px){
   .app{
     flex-direction: column;
   }
-
   .app__left,
   .app__right{
     width: 100%;

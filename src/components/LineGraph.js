@@ -1,10 +1,31 @@
 import React, { useState, useEffect } from 'react'
-import { ChartJS, CategoryScale } from "chart.js";
-import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS } from 'chart.js/auto'
+import { Chart, Line } from 'react-chartjs-2'
+import numeral from 'numeral'
 
-ChartJS.register(CategoryScale);
+const options = {
+    legend: {
+        display: false, 
+    }, 
+    elements: {
+        point: {
+            radius: 0,
+        },
+    },
+    maintainAspectRation: false,
+    tooltips: {
+        mode: "index", 
+        intersect: false, 
+        callbacks: {
+            label: function (tooltipItem, data){
+                return numeral(tooltipItem.value).format("+0.0");
+            }
+        }
+    }, 
+}
 
 function LineGraph({ casesType = 'cases'}) {
+
     const [ data, setData ] = useState({});
 
     const buildChartData = (data, casesType='cases') =>{
@@ -49,6 +70,7 @@ function LineGraph({ casesType = 'cases'}) {
                     }}
                 />
             )}
+            
         </div>
     )
 }
