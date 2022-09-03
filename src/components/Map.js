@@ -1,11 +1,21 @@
 import React from 'react'
+import "../assets/Map.css"
+import { MapContainer as LeafletMap, TileLayer} from 'react-leaflet';
+import { showDataOnMap } from '../util';
 
-function Map() {
+function Map({countries, mapCenter, mapZoom }) {
+  console.log(mapCenter);
   return (
     <div className='map'>
-        <h1>I am a Map!</h1>
+        <LeafletMap center={mapCenter} zoom={mapZoom}>
+          <TileLayer 
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            {/* Loop Through the countries */}
+            {showDataOnMap(countries)}
+        </LeafletMap>
     </div>
-  )
+  );
 }
 
 export default Map

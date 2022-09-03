@@ -35,4 +35,9 @@ body{
   .app{
     flex-direction: column;
   }
+
+  .app__left,
+  .app__right{
+    width: 100%;
+  }
 }
