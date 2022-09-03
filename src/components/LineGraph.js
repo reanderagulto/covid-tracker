@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react'
+import { CategoryScale } from "chart.js";
 import { Line } from 'react-chartjs-2';
+
+
+ChartJS.register(CategoryScale);
+
 
 function LineGraph() {
 
@@ -25,17 +30,23 @@ function LineGraph() {
         fetch("https://disease.sh/v3/covid-19/historical/all?lastdays=120")
         .then(response => response.json())
         .then(data => {
-            console.log(buildChartData(data));
+            setData(buildChartData(data));
         });
     }, []);
 
     return (
         <div>
             <h1>Im a graph</h1>
-            {/* <Line 
-                data={}
-                options
-            /> */}
+            <Line 
+                datasetIdKey='id'
+                data={{
+                    datasets: [{
+                        backgroundColor: "rgba(204, 16, 52, 0.8)",
+                        borderColor: "#CC1034", 
+                        data: data
+                    }]
+                }}
+            />
         </div>
     )
 }
